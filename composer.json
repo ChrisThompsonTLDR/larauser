@@ -1,0 +1,31 @@
+{
+    "name": "christhompsontldr/larauser",
+    "description": "Laravel powered user profile.",
+    "authors": [
+        {
+            "name": "Chris Thompson",
+            "email": "christhompsontldr@gmail.com",
+            "homepage": "https://christhompsontldr.com"
+        }
+    ],
+    "keywords": ["laravel","user","user management"],
+    "homepage": "https://laraboard.io",
+    "support": {
+        "issues": "https://github.com/christhompsontldr/larauser/issues",
+        "source": "https://github.com/christhompsontldr/larauser"
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "intervention/image": "2.3.*",
+        "laravelcollective/html": "5.3.*",
+        "kkszymanowski/traitor": "^0.2.0"
+    },
+    "autoload": {
+        "classmap": [
+            "src/commands"
+        ],
+        "psr-4": {
+            "Christhompsontldr\\Larauser\\": "src/"
+        }
+    }
+}
