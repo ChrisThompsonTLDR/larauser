@@ -56,5 +56,9 @@ Run the migrations
 php artisan migrate
 ```
 
+### Notice
+
+By default, Laravel's Auth system creates a users table that has a non-nullable field `name`.  You'll want change that to be nullable, or make sure your user register form has that field.
+
 ### HTML & Forms
 The [Laravel Collective](https://laravelcollective.com/) package is utilizes for building HTML and forms.  If you aren't already using it, no worries, Laraboard will install it.

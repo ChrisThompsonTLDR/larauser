@@ -4,6 +4,9 @@ namespace Christhompsontldr\Larauser;
 
 use Illuminate\Routing\Router;
 
+use Form;
+use Auth;
+
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     /**
@@ -36,6 +39,12 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         if (!$this->app->routesAreCached()) {
             $this->setupRoutes($this->app->router);
         }
+
+        //  create a storage disk
+        config(['filesystems.disks.larauser' => config('larauser.avatar.filesystem')]);
+
+        //  add a timezone component to Laravel Collective
+        Form::component('timezone', 'larauser::blocks.timezone', ['name', 'value', 'attributes']);
     }
 
     /**
@@ -56,10 +65,12 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     {
         $loader = \Illuminate\Foundation\AliasLoader::getInstance();
 
-        $loader->alias('Form', 'Collective\Html\FormFacade');
-        $loader->alias('Html', 'Collective\Html\HtmlFacade');
+        $loader->alias('Form',  'Collective\Html\FormFacade');
+        $loader->alias('Html',  'Collective\Html\HtmlFacade');
+        $loader->alias('Image', 'Intervention\Image\Facades\Image');
 
         $this->app->register('Collective\Html\HtmlServiceProvider');
+        $this->app->register('Intervention\Image\ImageServiceProvider');
 
         $this->registerCommands();
     }

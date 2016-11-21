@@ -1,5 +1,5 @@
+<?php echo '<?php' ?>
 
-asdf
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 

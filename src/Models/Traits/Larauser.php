@@ -5,4 +5,10 @@ use Illuminate\Database\Eloquent\Builder;
 
 trait Larauser
 {
+    //  RELATIONSHIPS
+
+    public function usermeta()
+    {
+        return $this->hasOne('\Christhompsontldr\Larauser\Models\Usermeta');
+    }
 }
