@@ -15,15 +15,19 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'usermeta.username' => 'required|max:40|unique:usermeta',
-            'email' => 'required|email|max:255|unique:users',
+            'usermeta.username' => ['max:40', 'required', Rule::unique('usermeta')->ignore(Auth::id(), 'user_id')],
+            'email' => ['max:255', 'email', 'required', Rule::unique('users')->ignore(Auth::id())],
             'password' => 'required|min:6|confirmed',
         ]);
 
-        $model = config('auth.providers.users.model');
+        $model          = config('auth.providers.users.model');
         $user           = new $model;
-        $user->email    = $request->email;
-        $user->password = bcrypt($request->password);
+        $user->email    = $request->input('email');
+
+        if (!empty($request->input('password'))) {
+            Auth::user()->password = bcrypt($request->input('password'));
+        }
+
         $user->save();
 
         //  save meta
@@ -33,18 +37,6 @@ class UserController extends Controller
             $meta->{$key} = $val;
         }
         $meta->save();
-
-        if (isset($data['admin'])) {
-            $role = \App\Role::whereName('admin')->first();
-            $user->attachRole($role);
-
-            /**
-             * @todo Entrust is a hooker and won't flush this stuff
-             */
-            Artisan::call('cache:clear');
-        }
-
-        Auth::login($user);
 
         return redirect()->to(config('larauser.routes.login_redirect'));
     }

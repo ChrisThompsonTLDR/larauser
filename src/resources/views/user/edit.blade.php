@@ -26,6 +26,7 @@
             </div>
             <div class="btn-group">
                 <label class="btn btn-primary btn-file">
+                    <span class="glyphicon glyphicon-picture"></span> Upload
                     <input type="file" accept="image/*" id="uploadImage" class="hide">
                     <input type="hidden" id="hiddenImage" name="usermeta[avatar]">
                 </label>

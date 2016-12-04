@@ -17,7 +17,7 @@ class LarauserTables extends Migration
 
             $table->integer('user_id')->unsigned();
             $table->string('username');
-            $table->boolean('avatar')->default(false);
+            $table->string('avatar', 100)->nullable();
             $table->string('timezone')->default('{{ config('app.timezone') }}');
 
             $table->timestamps();

@@ -12,11 +12,11 @@ return [
     'avatar' => [
         'path' => '/uploads/larauser/',  //  where avatars will displayed from
         'sizes' => [
-            'fit' => '150x150',
+            '150x150' => ['fit', 150, 150],
         ],
         'filesystem' => [
-            'driver' => 'local',
-            'root' => public_path('uploads/larauser'),
+            'driver' => 'public',
+            'root' => 'uploads/larauser/',
         ],
     ]
 ];
